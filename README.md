@@ -1,20 +1,17 @@
 # 🌱 Garden Advice Application
 
-A Python application that provides month-specific and season-specific gardening advice based on the current date, with support for both Northern and Southern hemispheres.
+A simple Python application that provides gardening advice based on the month/season you specify.
 
 ## Features
 
-- 📅 **Month-specific advice**: Get tailored gardening tips for all 12 months
-- 🍂 **Season-specific tips**: Receive advice based on the current season
-- 🌍 **Hemisphere support**: Works for both Northern and Southern hemispheres
-- ✅ **Error handling**: Comprehensive validation and error handling
-- 📚 **Well documented**: Full docstrings and inline comments
-- 🎨 **Formatted output**: Beautiful console output with emojis and borders
+- 📅 **Month-based advice**: Enter any month and get season-specific gardening tips
+- 🍂 **Season detection**: Automatically determines the season from the month
+- ✅ **Simple and easy to use**: Just run the script and enter a month
 
 ## Requirements
 
 - Python 3.6 or higher
-- Standard library only (no external dependencies)
+- No external dependencies (uses only Python standard library)
 
 ## Installation
 
@@ -24,131 +21,117 @@ git clone https://github.com/Qhayiya29-coder/garden_app.git
 cd garden_app
 ```
 
-2. Run the application:
-```bash
-python garden_advice.py
-```
+2. No additional installation needed - just run the script!
 
 ## Usage
 
 ### Basic Usage
 
-Simply run the script to get advice for the current month:
+Run the script and enter a month when prompted:
 
 ```bash
 python garden_advice.py
 ```
 
-### Programmatic Usage
+Example interaction:
+```
+Which month is it? march
 
-You can also import and use the functions in your own code:
-
-```python
-from garden_advice import get_month_advice, get_season, display_advice
-
-# Get advice for a specific month
-advice = get_month_advice(6)  # June
-print(advice)
-
-# Get season for a month
-season = get_season(6, "Northern")  # Returns "Summer"
-print(season)
-
-# Display formatted advice
-display_advice(month=6, hemisphere="Northern")
+Season detected: Spring
+Tip: Start seeds indoors, prep beds, and feed the soil with compost.
 ```
 
-## Example Output
+### Supported Months
 
-```
-============================================================
-🌱 GARDENING ADVICE 🌱
-============================================================
+The application recognizes all 12 months (case-insensitive):
+- **Spring months**: March, April, May
+- **Summer months**: June, July, August
+- **Autumn months**: September, October, November
+- **Winter months**: December, January, February
 
-📅 June: Harvest early vegetables. Deadhead flowers. Monitor for pests and diseases.
-
-🍂 Summer: Maintain watering schedules, harvest regularly, and provide shade for heat-sensitive plants.
-
-🌍 Current season (Northern hemisphere): Summer
-============================================================
-```
+You can enter the month in any format (e.g., "march", "March", "MARCH", "  march  ").
 
 ## Project Structure
 
 ```
 garden_app/
 ├── garden_advice.py    # Main application file
-├── index.html          # HTML file (untouched)
-├── repo.txt            # Repository URL
-└── README.md           # This file
+├── README.md           # This file
+└── repo.txt            # Repository URL
 ```
 
 ## Functions
 
-### `get_current_month()`
-Returns the current month (1-12) from the system date.
-
-### `get_season(month, hemisphere="Northern")`
-Determines the season based on month and hemisphere.
+### `get_season(month: str) -> str`
+Determines the season for a given month name.
 
 **Parameters:**
-- `month` (int): Month number (1-12)
-- `hemisphere` (str): "Northern" or "Southern"
+- `month` (str): Month name (case-insensitive)
 
-**Returns:** Season name (str)
+**Returns:** Season name as string ("spring", "summer", "autumn", or "winter")
 
-### `get_month_advice(month)`
-Returns gardening advice for a specific month.
+**Example:**
+```python
+>>> get_season("March")
+'spring'
+```
 
-**Parameters:**
-- `month` (int): Month number (1-12)
+### `get_user_input() -> str`
+Prompts the user to enter a month name.
 
-**Returns:** Formatted advice string
+**Returns:** User input with whitespace removed
 
-### `get_season_advice(season)`
-Returns gardening advice for a specific season.
+### `get_advice(season: str) -> str`
+Retrieves gardening advice for a specific season.
 
 **Parameters:**
 - `season` (str): Season name
 
-**Returns:** Advice string
+**Returns:** Gardening advice string
 
-### `display_advice(month=None, hemisphere="Northern")`
-Displays formatted gardening advice.
+**Example:**
+```python
+>>> get_advice("spring")
+'Start seeds indoors, prep beds, and feed the soil with compost.'
+```
+
+### `display_advice(season: str, advice: str) -> None`
+Displays the season and gardening advice to the user.
 
 **Parameters:**
-- `month` (int, optional): Month number. If None, uses current month.
-- `hemisphere` (str, optional): "Northern" or "Southern"
+- `season` (str): Season name
+- `advice` (str): Gardening advice to display
 
-## Error Handling
+### `main() -> None`
+Main entry point that orchestrates the garden advice flow.
 
-The application includes comprehensive error handling:
-- Validates month range (1-12)
-- Validates hemisphere input ("Northern" or "Southern")
-- Handles type errors
-- Provides clear error messages
+## How It Works
+
+1. The application prompts you to enter a month
+2. It looks up the month in the `MONTH_TO_SEASON` dictionary to determine the season
+3. It retrieves the appropriate gardening advice from the `SEASON_TASKS` dictionary
+4. It displays the season and advice in a formatted way
 
 ## Development
 
-This project follows a Git workflow with feature branches:
+This project demonstrates a complete Git workflow:
 
 1. **Initial version**: Basic implementation with TODO comments
-2. **Refactored version**: Modular functions and configuration dictionaries
-3. **Documented version**: Full documentation, error handling, and validation
+2. **Refactored version** (Issue #1): Code organized into reusable functions
+3. **Documented version** (Issue #2): Comprehensive documentation and comments added
 
 ### Git Workflow
 
-- Feature branches: `feature/refactor-functions`, `feature/add-documentation`
+- Feature branches: `feature/refactor-into-functions`, `feature/add-documentation`
 - Commit messages reference GitHub issues: `closes #1`, `closes #2`
-- Pull requests are created for each feature branch
+- Pull requests created for each feature branch
 
 ## Contributing
 
 1. Create a feature branch from `main`
 2. Make your changes
-3. Add tests if applicable
-4. Update documentation
-5. Create a pull request
+3. Update documentation if needed
+4. Create a pull request
 
 ## License
 
@@ -157,4 +140,3 @@ This project is open source and available for educational purposes.
 ## Repository
 
 https://github.com/Qhayiya29-coder/garden_app.git
-
